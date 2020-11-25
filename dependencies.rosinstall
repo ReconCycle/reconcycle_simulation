@@ -1,0 +1,12 @@
+- git:
+    local-name: reconcycle_visualization
+    uri: git@github.com:ReconCycle/reconcycle_visualization.git
+    version: main
+- git:
+    local-name: panda_simulator
+    uri: git@github.com:justagist/panda_simulator.git
+    version: kinetic-devel
+- git:
+    local-name: franka_panda_description
+    uri: git@github.com:ReconCycle/franka_panda_description.git
+    version: master
