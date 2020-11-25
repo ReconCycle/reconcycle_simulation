@@ -22,10 +22,10 @@
   </include>
 
   
-  <include file="$(find reconcycle_description)/launch/spawn_panda_gazebo.launch">
+  <include file="$(find reconcycle_simulation)/launch/spawn_panda_gazebo.launch">
     <arg name="ns" value="panda_1" />
   </include>
-  <include file="$(find reconcycle_description)/launch/spawn_panda_gazebo.launch">
+  <include file="$(find reconcycle_simulation)/launch/spawn_panda_gazebo.launch">
     <arg name="ns" value="panda_2" />
     <arg name="initX" value="1.0" />
   </include>

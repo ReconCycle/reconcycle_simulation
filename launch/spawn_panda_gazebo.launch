@@ -21,7 +21,7 @@
   <!-- <param name="/arm/gravity_tip_name" value="panda_link8" />  -->
   
   <!--  Robot details - not sure what this does tbh-->
-  <rosparam command="load" file="$(find reconcycle_description)/conf/robot_details.yaml"/>
+  <rosparam command="load" file="$(find reconcycle_simulation)/conf/robot_details.yaml"/>
 
   <!-- See this: https://answers.ros.org/question/264359/starting-a-controller-in-the-same-namespace-as-the-controller_manager/ -->
   <group ns="$(arg ns)">
