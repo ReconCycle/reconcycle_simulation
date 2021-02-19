@@ -23,21 +23,22 @@
 
 
     <!-- hack: rqt joint trajectory controller needsto read robot desciption from global namespace -->
-    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find franka_panda_description)/robots/panda_arm_hand.urdf.xacro load_gripper:=$(arg load_gripper) load_gazebo:=$(arg load_gazebo) use_gazebo_control:=true" />
-
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find franka_panda_description)/robots/panda_arm_hand.urdf.xacro load_gripper:=$(arg load_gripper) load_gazebo:=$(arg load_gazebo)" />
 
     <!-- spawn first panda -->
     <include file="$(find reconcycle_simulation)/launch/spawn_panda.launch" ns="panda1" >
         <arg name="robot" value="panda1" />
-        <arg name="initX" default="0" />
-        <arg name="initY" default="0" />
+        <arg name="initX" value="0" />
+        <arg name="initY" value="0" />
+        <arg name="use_ros_control" value="true" />
     </include>
 
     <!-- spawn second panda -->
     <include file="$(find reconcycle_simulation)/launch/spawn_panda.launch" ns="panda2" >
         <arg name="robot" value="panda2" />
-        <arg name="initX" default="1" />
-        <arg name="initY" default="0" />
+        <arg name="initX" value="1" />
+        <arg name="initY" value="0" />
+        <arg name="use_ros_control" value="true" />
     </include>
 
 </launch>
