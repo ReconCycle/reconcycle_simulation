@@ -7,7 +7,7 @@
     <arg name="initX" default="0" />
     <arg name="initY" default="0" />
 
-    <rosparam command="load" file="$(find panda_gazebo)/config/robot_details.yaml" />
+    <rosparam command="load" file="$(find reconcycle_simulation)/conf/robot_details.yaml" />
     <param name="robot_description" command="$(find xacro)/xacro --inorder $(find franka_panda_description)/robots/panda_arm_hand.urdf.xacro
                         load_gripper:=$(arg load_gripper)
                         load_gazebo:=true
