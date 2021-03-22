@@ -25,6 +25,10 @@
     <!-- hack: rqt joint trajectory controller needsto read robot desciption from global namespace -->
     <param name="robot_description" command="$(find xacro)/xacro --inorder $(find franka_panda_description)/robots/panda_arm_hand.urdf.xacro load_gripper:=$(arg load_gripper) load_gazebo:=$(arg load_gazebo)" />
 
+    <!-- <rosparam command="load" file="$(find reconcycle_simulation)/conf/robot_details.yaml" />-->
+    <rosparam command="load" file="$(find panda_gazebo)/config/robot_details.yaml"/>
+
+    
     <!-- spawn first panda -->
     <include file="$(find reconcycle_simulation)/launch/spawn_panda.launch" ns="panda1" >
         <arg name="robot" value="panda1" />
