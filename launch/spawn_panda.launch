@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <launch>
     <arg name="load_gripper" default="true" />
-    <arg name="use_ros_control" default="true" />
+  <arg name="justagist_sim_controllers" default="false"/>
+  <arg name="use_ros_control" default="false"/>
+  <arg name="reconcycle_sim_controllers" default="true"/>
 
     <arg name="robot" default="panda" />
     <arg name="initX" default="0" />
@@ -40,14 +42,23 @@
         </include>      
     </group>
 
-    <group unless="$(arg use_ros_control)">
-        <!-- launch justagist controllers -->
-        <include file="$(find panda_sim_controllers)/launch/panda_sim_controllers.launch">
-            <arg name="gui" value="false" /> 
-            <arg name="ns" value="$(arg robot)" />
-            <arg name="load_gripper" value="$(arg load_gripper)" />
-        </include>
-    </group>
+
+
+    <group if="$(arg justagist_sim_controllers)">
+    <!-- ros_control panda launch file -->
+    <include file="$(find panda_sim_controllers)/launch/panda_sim_controllers.launch">
+        <arg name="gui" value="false" />
+        <arg name="ns" value="$(arg ns)" />
+        <arg name="load_gripper" value="$(arg load_gripper)" />
+    </include>
+    </group>   
+
+    <group if="$(arg reconcycle_sim_controllers)">
+    <!-- start reconcycle joint controller  -->
+    <include file="$(find panda_action_servers)/launch/sim_joint_impedance.launch" />
+  </group>   
+
+
     
 
 </launch>

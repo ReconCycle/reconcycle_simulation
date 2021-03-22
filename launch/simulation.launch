@@ -30,7 +30,6 @@
         <arg name="robot" value="panda1" />
         <arg name="initX" value="0" />
         <arg name="initY" value="0" />
-        <arg name="use_ros_control" value="true" />
     </include>
 
     <!-- spawn second panda -->
@@ -38,7 +37,6 @@
         <arg name="robot" value="panda2" />
         <arg name="initX" value="1" />
         <arg name="initY" value="0" />
-        <arg name="use_ros_control" value="true" />
     </include>
 
 </launch>
