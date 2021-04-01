@@ -3,10 +3,10 @@
   <name>reconcycle_simulation</name>
   <version>1.2.7</version>
   <description>
-      Descriptions of the ReconCycle system
+      Simulation of the ReconCycle system
   </description>
 
-  <author>Timotej Gaspar</author>
+  <author>Timotej Gaspar, Mihael Simonic, Matej Stefanic</author>
   <maintainer email="timotej.gaspar@ijs.si">Timotej Gaspar</maintainer>
 
   <license>BSD</license>
@@ -22,6 +22,7 @@
   <exec_depend>rviz</exec_depend>
   <exec_depend>urdf</exec_depend>
   <exec_depend>xacro</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
 
   <export>
   </export>

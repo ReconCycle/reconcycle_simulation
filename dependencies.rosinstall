@@ -3,8 +3,8 @@
     uri: git@github.com:ReconCycle/reconcycle_visualization.git
     version: main
 - git:
-    local-name: panda_simulator
-    uri: git@github.com:justagist/panda_simulator.git
+    local-name: gazebo_panda
+    uri: git@github.com:justagist/gazebo_panda.git
     version: kinetic-devel
 - git:
     local-name: franka_panda_description
