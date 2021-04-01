@@ -1,36 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <launch>
-    <!-- these are the arguments you can pass this launch file, for example paused:=true -->
 
+    <!-- these are the arguments you can pass this launch file, for example paused:=true -->
     <arg name="load_gazebo" default="true" />
     <arg name="load_gripper" default="true" />
     <arg name="paused" default="false" />
     <arg name="use_sim_time" default="true" />
     <arg name="gui" default="true" />
-    <arg name="headless" default="false" />
+    <arg name="recording" default="false" />
     <arg name="debug" default="false" />
 
-
-    <!-- We resume the logic in empty_world.launch, changing the name of the world to be launched -->
+    <!-- start gazebo -->
     <include if="$(arg load_gazebo)" file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="world_name" value="$(find gazebo_panda)/worlds/panda.world" />
         <arg name="debug" value="$(arg debug)" />
         <arg name="gui" value="$(arg gui)" />
         <arg name="paused" value="$(arg paused)" />
         <arg name="use_sim_time" value="$(arg use_sim_time)" />
-        <arg name="headless" value="$(arg headless)" />
+        <arg name="headless" value="$(arg recording)" /> <!--  Enable gazebo state log recording -->
     </include>
 
-
-    <!-- hack: rqt joint trajectory controller needsto read robot desciption from global namespace -->
-    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find franka_panda_description)/robots/panda_arm_hand.urdf.xacro load_gripper:=$(arg load_gripper) load_gazebo:=$(arg load_gazebo)" />
-
     <!-- spawn first panda -->
-    <include file="$(find reconcycle_simulation)/launch/spawn_panda.launch" ns="panda_1" >
+    <include file="$(find reconcycle_simulation)/launch/spawn_panda.launch" ns="panda_1" > <!-- TODO: ns=robot -->
         <arg name="robot" value="panda_1" />
         <arg name="initX" value="0" />
         <arg name="initY" value="0" />
-        <arg name="use_ros_control" value="true" />
     </include>
 
     <!-- spawn second panda -->
@@ -38,7 +32,6 @@
         <arg name="robot" value="panda_2" />
         <arg name="initX" value="1" />
         <arg name="initY" value="0" />
-        <arg name="use_ros_control" value="true" />
     </include>
 
 </launch>
