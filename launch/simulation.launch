@@ -39,8 +39,7 @@
     </group>
 
     <group unless="$(arg dual_setup)">
-        <include file="$(find reconcycle_simulation)/launch/spawn_panda.launch" ns="panda_1" > <!-- TODO: ns=robot -->
-            <arg name="robot" value="panda_1" />
+        <include file="$(find reconcycle_simulation)/launch/spawn_panda.launch"> 
             <arg name="initX" value="0" />
             <arg name="initY" value="0" />
         </include>
