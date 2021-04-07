@@ -9,6 +9,9 @@
     <arg name="gui" default="true" />
     <arg name="recording" default="false" />
     <arg name="debug" default="false" />
+    <arg name="dual_setup" default="true" />
+    <arg name="controller" default="reconcycle_joint_controller"/>
+
 
     <!-- start gazebo -->
     <include if="$(arg load_gazebo)" file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -20,18 +23,32 @@
         <arg name="headless" value="$(arg recording)" /> <!--  Enable gazebo state log recording -->
     </include>
 
-    <!-- spawn first panda -->
-    <include file="$(find reconcycle_simulation)/launch/spawn_panda.launch" ns="panda_1" > <!-- TODO: ns=robot -->
-        <arg name="robot" value="panda_1" />
-        <arg name="initX" value="0" />
-        <arg name="initY" value="0" />
-    </include>
 
-    <!-- spawn second panda -->
-    <include file="$(find reconcycle_simulation)/launch/spawn_panda.launch" ns="panda_2" >
-        <arg name="robot" value="panda_2" />
-        <arg name="initX" value="1" />
-        <arg name="initY" value="0" />
-    </include>
+    <group if="$(arg dual_setup)">
+        <!-- spawn first panda -->
+        <include file="$(find reconcycle_simulation)/launch/spawn_panda.launch" ns="panda_1" > <!-- TODO: ns=robot -->
+            <arg name="robot" value="panda_1" />
+            <arg name="initX" value="0" />
+            <arg name="initY" value="0" />
+            <arg name="controller" value="$(arg controller)" />
+        </include>
+
+        <!-- spawn second panda -->
+        <include file="$(find reconcycle_simulation)/launch/spawn_panda.launch" ns="panda_2" >
+            <arg name="robot" value="panda_2" />
+            <arg name="initX" value="1" />
+            <arg name="initY" value="0" />
+            <arg name="controller" value="$(arg controller)" />
+        </include>
+    </group>
+
+    <group unless="$(arg dual_setup)">
+        <include file="$(find reconcycle_simulation)/launch/spawn_panda.launch"> 
+            <arg name="initX" value="0" />
+            <arg name="initY" value="0" />
+            <arg name="controller" value="$(arg controller)" />
+        </include>
+    </group>
+
 
 </launch>

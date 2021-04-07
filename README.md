@@ -29,7 +29,7 @@ $ catkin build
 # Usage
 
 ```
-$ roslaunch reconcycle_simulation simulate_r obot.launch rviz:=true
+$ roslaunch reconcycle_simulation simulation.launch
 ```
 
 # Tricks and tips
