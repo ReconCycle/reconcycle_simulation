@@ -6,9 +6,7 @@
   <arg name="initY" default="0" />
 
   <arg name="load_gripper" default="true" />
-
-  <arg name="joint_trajectory_controllers" default="false"/>
-  <arg name="reconcycle_sim_controllers" default="true"/>
+  <arg name="controller" default="none" doc="none, reconcycle_joint_controller, reconcycle_cart_controller, reconcycle_cart_controller_tum, joint_trajectory_controller" />
 
   <param name="robot_description" command="$(find xacro)/xacro --inorder $(find franka_panda_description)/robots/panda_arm_hand.urdf.xacro
     load_gripper:=$(arg load_gripper)
@@ -18,17 +16,11 @@
   <!-- Spawn urdf of the robot -->
   <node name="load_model" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model $(arg robot) -x $(arg initX) -y $(arg initY)" />
 
-  <!-- launch controllers -->
-
-  <group if="$(arg reconcycle_sim_controllers)">
-    <!-- start reconcycle joint controller  -->
-    <include file="$(find panda_action_servers)/launch/sim_joint_impedance.launch" />
-  </group>
-
-  <group if="$(arg joint_trajectory_controllers)">
-    <!-- start joint trajectory controller -->
-    <include file="$(find panda_action_servers)/launch/sim_joint_trajectory.launch" />
-  </group>
+  <!-- launch controller -->
+  <include if="$(eval arg('controller') == 'reconcycle_joint_controller')" file="$(find panda_action_servers)/launch/sim_joint_impedance.launch" />
+  <include if="$(eval arg('controller') == 'reconcycle_cart_controller')" file="$(find panda_action_servers)/launch/sim_cart_impedance.launch" />
+  <include if="$(eval arg('controller') == 'reconcycle_cart_controller_tum')" file="$(find panda_action_servers)/launch/sim_cart_impedance_tum.launch" />
+  <include if="$(eval arg('controller') == 'joint_trajectory_controller')" file="$(find panda_action_servers)/launch/sim_joint_trajectory.launch" />
 
   <!-- state publisher-->
   <arg name="needs_prefix" value="$(eval arg('robot') != 'panda')" />

@@ -10,6 +10,8 @@
     <arg name="recording" default="false" />
     <arg name="debug" default="false" />
     <arg name="dual_setup" default="true" />
+    <arg name="controller" default="reconcycle_joint_controller"/>
+
 
     <!-- start gazebo -->
     <include if="$(arg load_gazebo)" file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -28,6 +30,7 @@
             <arg name="robot" value="panda_1" />
             <arg name="initX" value="0" />
             <arg name="initY" value="0" />
+            <arg name="controller" value="$(arg controller)" />
         </include>
 
         <!-- spawn second panda -->
@@ -35,6 +38,7 @@
             <arg name="robot" value="panda_2" />
             <arg name="initX" value="1" />
             <arg name="initY" value="0" />
+            <arg name="controller" value="$(arg controller)" />
         </include>
     </group>
 
@@ -42,6 +46,7 @@
         <include file="$(find reconcycle_simulation)/launch/spawn_panda.launch"> 
             <arg name="initX" value="0" />
             <arg name="initY" value="0" />
+            <arg name="controller" value="$(arg controller)" />
         </include>
     </group>
 
