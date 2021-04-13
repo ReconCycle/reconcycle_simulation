@@ -8,7 +8,7 @@
   <arg name="load_gripper" default="true" />
   <arg name="controller" default="none" doc="none, reconcycle_joint_controller, reconcycle_cart_controller, reconcycle_cart_controller_tum, joint_trajectory_controller" />
 
-  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find franka_panda_description)/robots/panda_arm_hand.urdf.xacro
+  <param name="robot_description" command="$(find xacro)/xacro $(find franka_panda_description)/robots/panda_arm_hand.urdf.xacro
     load_gripper:=$(arg load_gripper)
     load_gazebo:=true
     use_gazebo_control:=true" />  <!-- load_gazebo adds extra parameters from urdf for simulation, use_gazebo_control loads standard ros_control hardware interface -->
@@ -24,7 +24,7 @@
 
   <!-- state publisher-->
   <arg name="needs_prefix" value="$(eval arg('robot') != 'panda')" />
-  <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher">
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
     <param if="$(arg needs_prefix)" name="tf_prefix" value="$(arg robot)" />
   </node>
 

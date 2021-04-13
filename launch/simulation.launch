@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <launch>
 
+    <!-- <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${walltime:%Y-%m-%d %H:%M:%S}] [${file}]: ${message}"/> -->
+    <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${time:%H:%M:%S}]: ${message}"/> 
+
     <!-- these are the arguments you can pass this launch file, for example paused:=true -->
     <arg name="load_gazebo" default="true" />
     <arg name="load_gripper" default="true" />
@@ -9,7 +12,7 @@
     <arg name="gui" default="true" />
     <arg name="recording" default="false" />
     <arg name="debug" default="false" />
-    <arg name="dual_setup" default="true" />
+    <arg name="dual_setup" default="false" />
     <arg name="controller" default="reconcycle_joint_controller"/>
 
 
