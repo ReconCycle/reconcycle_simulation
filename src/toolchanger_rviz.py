@@ -133,7 +133,7 @@ def s_proc():
         child = subprocess.Popen(["roslaunch","reconcycle_simulation", "static_tools.launch", "selector:=1"])
     elif tool_name == 'vacuumgripper':
         child = subprocess.Popen(["roslaunch","reconcycle_simulation", "static_tools.launch", "selector:=2"])
-    elif tool_name == 'tool3':
+    elif tool_name == 'parallelgripper':
         child = subprocess.Popen(["roslaunch","reconcycle_simulation", "static_tools.launch", "selector:=3"])
     
 
