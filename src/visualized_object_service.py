@@ -89,7 +89,7 @@ def object_to_hand_service_call(tools_data):
     # msg_temp wait_for_message is used in case no object is present and service is called.
     # Service waits until object data is available
     rospy.loginfo("Received service call")   
-    msg_temp = rospy.wait_for_message("/visualization_marker_array", MarkerArray)
+    msg_temp = rospy.wait_for_message("/visualization_marker_array", MarkerArray, timeout=5)
     time.sleep(0.5)
     # When topic data is available then subscribing starts
     subs = rospy.Subscriber("/visualization_marker_array", MarkerArray, call_marker)
@@ -124,8 +124,8 @@ def active_data(marker_data):
                     markerPub.publish(marker[i])
             else:
                 pass
-    except KeyboardInterrupt:
-        pass
+    except ROSException:
+        rospy.loginfo("No data to perform execution!")
 
 
 if __name__ == '__main__':
