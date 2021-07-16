@@ -11,7 +11,6 @@ import geometry_msgs.msg
 import time
 import argparse
 import sys
-from std_msgs.msg import Float64MultiArray
 import tf
 
 
@@ -26,7 +25,7 @@ class FixedTFBroadcaster:
     def tf_loop(self, tool, frame, Tmatrix):
         self.tool = tool
         self.frame = frame
-        self.matrix = Float64MultiArray()
+        self.matrix = SetList()
         self.matrix = Tmatrix
 
         self.matrix = self.matrix[1:-1]
@@ -76,7 +75,6 @@ class FixedTFBroadcaster:
             return True, "Transform changed to {} !".format(self.matrix)
         except:
             return False, "Input data: {}!".format(self.matrix)
-
 
 
 if __name__ == '__main__':
