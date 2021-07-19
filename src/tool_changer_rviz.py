@@ -25,16 +25,13 @@ class FixedTFBroadcaster:
     def tf_loop(self, tool, frame, Tmatrix):
         self.tool = tool
         self.frame = frame
-        self.matrix = SetList()
         self.matrix = Tmatrix
 
-        self.matrix = self.matrix[1:-1]
-        self.matrix = self.matrix.split(" ")
         for i in range(len(self.matrix)):
             self.matrix[i] = float(self.matrix[i])
 
         self.matrix[3:] = tf.transformations.quaternion_from_euler(self.matrix[3], self.matrix[4], self.matrix[5])
-
+        
 
         while not rospy.is_shutdown():
             # Run this loop at about 100Hz
@@ -66,8 +63,7 @@ class FixedTFBroadcaster:
         
     def change_T_matrix(self, T_data):
         try:
-            self.matrix = T_data.matrix[1:-1]
-            self.matrix = self.matrix.split(" ")
+            self.matrix = list(T_data.matrix)
             for i in range(len(self.matrix)):
                 self.matrix[i] = float(self.matrix[i])
                 
@@ -83,7 +79,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--tool', default=None, type=str)
     parser.add_argument('--frame', default=None, type=str)
-    parser.add_argument('--Tmatrix', default=None, type=str)
+    parser.add_argument('--Tmatrix', nargs='+', default=[0,0,0,0,0,0])
 
     try:
         args, unknown = parser.parse_known_args(rospy.myargv()[:])
