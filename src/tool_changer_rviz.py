@@ -74,7 +74,8 @@ class FixedTFBroadcaster:
             self.matrix[3:] = tf.transformations.quaternion_from_euler(self.matrix[3], self.matrix[4], self.matrix[5])
             return True, "Transform changed to {} !".format(self.matrix)
         except:
-            return False, "Input data: {}!".format(self.matrix)
+            self.matrix = [0, 0, 0, 0, 0, 0, 1]
+            return False, "Wrong input, matrix set to default value: {}!".format(self.matrix)
 
 
 if __name__ == '__main__':
